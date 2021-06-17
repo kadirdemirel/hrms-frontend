@@ -8,7 +8,7 @@ import WorkingTimeService from "../services/WorkingTimeService";
 import TypeOfWorkService from "../services/TypeOfWorkService";
 import * as Yup from "yup";
 
-export default function JobAdvertisementAdd() {
+export default function AddJobPosting() {
   const [cities, setCities] = useState([]);
   const [jobTitles, setJobTitle] = useState([]);
   const [workingTimes, setworkingTimes] = useState([]);
@@ -45,10 +45,10 @@ export default function JobAdvertisementAdd() {
     text: jobTitle.title,
     value: jobTitle.id,
   }));
-  const getTypeOfWorks = typeOfWorks.map((getTypeOfWork, index) => ({
+  const getTypeOfWorks = typeOfWorks.map((TypeOfWork, index) => ({
     key: index,
-    text: getTypeOfWork.typeOfWorkName,
-    value: getTypeOfWork.id,
+    text: TypeOfWork.typeOfWorkName,
+    value: TypeOfWork.id,
   }));
   const getWorkingTimes = workingTimes.map((workingTime, index) => ({
     key: index,
@@ -68,7 +68,7 @@ export default function JobAdvertisementAdd() {
       typeOfWordId: "",
       workingTimeId: "",
       employerId: 2,
-    },
+    }, 
     validationSchema: Yup.object({
       jobTitleId: Yup.number().required("İş pozisyonu bilgisi seçiniz!"),
       cityId: Yup.string().required("Şehir bilgisi seçiniz!"),
@@ -83,8 +83,23 @@ export default function JobAdvertisementAdd() {
       ),
     }),
     onSubmit: (values) => {
+      
       console.log(values);
-    
+      let jobPosting = {
+        lastDate: values.lastDate,
+        city: { id: values.cityId },
+        employer: { id: values.employerId },
+        jobTitle: { id: values.jobTitleId },
+        minSalary: values.minSalary,
+        maxSalary: values.maxSalary,
+        openPosition: values.openPosition,
+        jobDescription: values.jobDescription,
+        typeOfWord: { id: values.typeOfWordId },
+        workingTime: { id: values.workingTimeId }
+    };
+    console.log(jobPosting);
+    jobPostingService.addJobPosting(jobPosting).then((result) => console.log(result.data.message));
+   
     },
   });
 
@@ -95,7 +110,7 @@ export default function JobAdvertisementAdd() {
           <h3 className="headerStyle">İŞ İLANI EKLE</h3>
         </Segment>
         <Segment>
-          <Form onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <div
               style={{
                 textAlign: "left",
@@ -207,7 +222,7 @@ export default function JobAdvertisementAdd() {
      
                 <Input
                   id="minSalary"
-                  placeholder="MİNUMUM MAAŞ SEÇİNİZ"
+                  placeholder="MİNUMUM MAAŞ GİRİNİZ"
                   fluid
                   style={{ marginRight: "1em", marginTop: "1em" }}
                   onChange={formik.handleChange}
@@ -221,7 +236,7 @@ export default function JobAdvertisementAdd() {
       
                 <Input
                   id="maxSalary"
-                  placeholder="MAXİUMUM MAAŞ SEÇİNİZ"
+                  placeholder="MAXİUMUM MAAŞ GİRİNİZ"
                   fluid
                   style={{ marginRight: "1em", marginTop: "1em" }}
                   onChange={formik.handleChange}
@@ -288,7 +303,7 @@ export default function JobAdvertisementAdd() {
             >
            İŞ İLANI EKLE
             </Button>
-          </Form>
+          </form>
         </Segment>
       </Segment.Group>
     </div>

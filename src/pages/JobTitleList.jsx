@@ -1,6 +1,6 @@
 import React,{ useState,useEffect } from "react";
 import JobTitleService from "../services/JobTitleService";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Icon,  Menu, Table } from "semantic-ui-react";
 
 export default function JobTitleList() {
   const [jobTitles, setJobTitles] = useState([]);

@@ -12,6 +12,7 @@ import { Route } from "react-router-dom";
 import EmployerList from "../pages/EmployerList";
 import CandidateList from "../pages/CandidateList";
 import AddJobPosting from "../pages/AddJobPosting";
+import AddJobTitle from "../pages/AddJobTitle";
 export default function Dashboard() {
   return (
     <div>
@@ -32,6 +33,7 @@ export default function Dashboard() {
         <Route path="/candidate" component={CandidateList}></Route>
         <Route path="/cv" component={CvList}></Route>
         <Route path="/add_job_posting" component={AddJobPosting}></Route>
+        <Route path="/add_job_title" component={AddJobTitle}></Route>
 
           </Grid.Column>
         </Grid.Row>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ImageService from "../services/ImageService";
-import { Icon, Label, Menu, Table,Image } from "semantic-ui-react";
+import { Icon,  Menu, Table,Image } from "semantic-ui-react";
 
 export default function ImageList() {
     const [images, setImages] = useState([]);

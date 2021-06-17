@@ -9,6 +9,7 @@ export default function Navi() {
         <Container>
           <Menu.Item name="Ana Sayfa" as={NavLink} to="/" />
           <Menu.Item name="Yeni İlan Oluştur" as={NavLink} to="/add_job_posting" />
+          <Menu.Item name="Yeni Başlık Oluştur" as={NavLink} to="/add_job_title" />
     
 
           <Menu.Menu position="right">

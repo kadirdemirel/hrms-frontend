@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table } from "semantic-ui-react";
 import JobPostingService from "../services/JobPostingService";
 
 export default function JobPostingList() {
@@ -36,6 +36,7 @@ export default function JobPostingList() {
               <Table.Cell><div>{jobPosting.status}</div></Table.Cell>
               <Table.Cell><div>{jobPosting.jobTitle.title}</div></Table.Cell>
               <Table.Cell><div>{jobPosting.employer.companyName}</div></Table.Cell>
+              <Table.Cell><div>{jobPosting.city.cityName}</div></Table.Cell>
     
             </Table.Row>
           ))}

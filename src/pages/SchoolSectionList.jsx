@@ -1,6 +1,6 @@
 import React,{ useState,useEffect } from "react";
 import SchoolSectionService from "../services/SchoolSectionService";
-import { Icon, Label, Menu, Table } from "semantic-ui-react";
+import { Icon,  Menu, Table } from "semantic-ui-react";
 
 export default function SchoolSectionList() {
   const [schoolSections, setschoolSections] = useState([]);
