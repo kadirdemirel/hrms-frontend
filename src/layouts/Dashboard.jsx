@@ -13,6 +13,7 @@ import EmployerList from "../pages/EmployerList";
 import CandidateList from "../pages/CandidateList";
 import AddJobPosting from "../pages/AddJobPosting";
 import AddJobTitle from "../pages/AddJobTitle";
+import CvDetail from "../pages/CvDetail";
 export default function Dashboard() {
   return (
     <div>
@@ -22,19 +23,15 @@ export default function Dashboard() {
             <Categories></Categories>
           </Grid.Column>
           <Grid.Column width={12}>
-        <Route path="/" exact component={JobPostingList}></Route>
-        <Route path="/image" component={ImageList}></Route>
-        <Route path="/job_title" component={JobTitleList}></Route>
-        <Route path="/school_section" component={SchoolSectionList}></Route>
-        <Route path="/language_level" component={LanguageLevelList}></Route>
-        <Route path="/cv_skill" component={CvSkillList}></Route>
-        <Route path="/job_posting" component={JobPostingList}></Route>
-        <Route path="/employer" component={EmployerList}></Route>
-        <Route path="/candidate" component={CandidateList}></Route>
-        <Route path="/cv" component={CvList}></Route>
-        <Route path="/add_job_posting" component={AddJobPosting}></Route>
-        <Route path="/add_job_title" component={AddJobTitle}></Route>
-
+            <Route path="/" exact component={JobPostingList}></Route>
+            <Route path="/job_title" exact component={JobTitleList}></Route>
+            <Route path="/job_posting" component={JobPostingList}></Route>
+            <Route path="/employer" component={EmployerList}></Route>
+            <Route path="/candidate" component={CandidateList}></Route>
+            <Route path="/cv" component={CvList}></Route>
+            <Route path="/add_job_posting" component={AddJobPosting}></Route>
+            <Route path="/add_job_title" component={AddJobTitle}></Route>
+            <Route path="/cv_detail/:id" component={CvDetail}></Route>
           </Grid.Column>
         </Grid.Row>
       </Grid>

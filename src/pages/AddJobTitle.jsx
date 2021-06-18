@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Button, Segment, Input, Dropdown,Form } from "semantic-ui-react";
+import { Button, Segment, Input, Dropdown, Form } from "semantic-ui-react";
 import CityService from "../services/CityService";
 import JobPostingService from "../services/JobPostingService";
 import JobTitleService from "../services/JobTitleService";
@@ -9,32 +9,24 @@ import TypeOfWorkService from "../services/TypeOfWorkService";
 import * as Yup from "yup";
 
 export default function AddJobTitle() {
-
   let jobTitleService = new JobTitleService();
-
-
-
-
 
   const formik = useFormik({
     initialValues: {
       title: "",
-  
-    }, 
+    },
     validationSchema: Yup.object({
-      title: Yup.string().required("İş pozisyonu bilgisi seçiniz!")
- 
+      title: Yup.string().required("İş pozisyonu bilgisi seçiniz!"),
     }),
     onSubmit: (values) => {
-      
       console.log(values);
       let jobTitle = {
         title: values.title,
-   
-    };
-    console.log(jobTitle);
-    jobTitleService.addJobTitle(jobTitle).then((result) => console.log(result.data.message));
-   
+      };
+      console.log(jobTitle);
+      jobTitleService
+        .addJobTitle(jobTitle)
+        .then((result) => console.log(result.data.message));
     },
   });
 
@@ -53,14 +45,7 @@ export default function AddJobTitle() {
                 fontWeight: "bold",
               }}
             >
-  
-              
-          
-           
-      
-           
               <div className="divStyle">
-            
                 <Input
                   id="title"
                   placeholder="AÇIK POZİSYON SAYISI GİRİNİZ"
@@ -73,8 +58,8 @@ export default function AddJobTitle() {
                   <p style={{ color: "red" }}>{formik.errors.title}</p>
                 )}
               </div>
-              </div>
-             
+            </div>
+
             <Button
               type="submit"
               style={{
@@ -83,7 +68,7 @@ export default function AddJobTitle() {
                 marginBottom: "0.001em",
               }}
             >
-           İŞ İLANI EKLE
+              İŞ İLANI EKLE
             </Button>
           </Form>
         </Segment>

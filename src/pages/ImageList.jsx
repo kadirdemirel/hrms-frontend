@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ImageService from "../services/ImageService";
 import { Icon,  Menu, Table,Image } from "semantic-ui-react";
-
+import { useParams } from "react-router-dom";
 export default function ImageList() {
     const [images, setImages] = useState([]);
+    let{id}=useParams();
     useEffect(() => {
       let imageService = new ImageService();
-      imageService.getImages(1).then((result) => setImages(result.data.data));
+      imageService.getImages(id).then((result) => setImages(result.data.data));
     }, []);
   
     return (

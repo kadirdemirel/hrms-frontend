@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Icon,  Menu, Table } from "semantic-ui-react";
 import LanguageLevelService from "../services/LanguageLevelService";
 
 export default function LanguageLevelList() {
   const [languageLevels, setlanguageLevels] = useState([]);
+
+  let{id}=useParams();
+
   useEffect(() => {
     let languageLevelService = new LanguageLevelService();
     languageLevelService
-      .getLanguageLevels(1)
+      .getLanguageLevels(id)
       .then((result) => setlanguageLevels(result.data.data));
   }, []);
 

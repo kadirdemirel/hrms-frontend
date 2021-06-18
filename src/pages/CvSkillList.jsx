@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Icon,  Menu, Table } from "semantic-ui-react";
 import CvSkillService from "../services/CvSkillService"
 
@@ -7,9 +8,10 @@ export default function CvSkillList() {
  
 
     const [cvSkills, setCvSkills] = useState([]);
+    let{id}=useParams();
   useEffect(() => {
     let cvSkillService = new CvSkillService();
-    cvSkillService.getCvSkills(1).then((result) => setCvSkills(result.data.data));
+    cvSkillService.getCvSkills(id).then((result) => setCvSkills(result.data.data));
   }, []);
 
  

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Icon,  Menu, Table } from "semantic-ui-react";
+import { Button, Icon,  Menu, Table } from "semantic-ui-react";
 import CvService from "../services/CvService";
+import CvDetail from "./CvDetail";
+import { Link } from "react-router-dom";
 export default function CvList() {
   const [cvs, setCvs] = useState([]);
   useEffect(() => {
@@ -36,6 +38,7 @@ export default function CvList() {
               <Table.Cell><div>{cv.yearOff}</div></Table.Cell>
               <Table.Cell><div>{cv.candidate.firstName}</div></Table.Cell>
               <Table.Cell><div>{cv.candidate.lastName}</div></Table.Cell>
+              <Table.Cell><div><Button color="twitter"><Link to={`/cv_detail/${cv.id}`}>Detay</Link></Button></div></Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

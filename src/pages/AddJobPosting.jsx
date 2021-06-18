@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { Button, Segment, Input, Dropdown,Form } from "semantic-ui-react";
+import { Button, Segment, Input, Dropdown, Form } from "semantic-ui-react";
 import CityService from "../services/CityService";
 import JobPostingService from "../services/JobPostingService";
 import JobTitleService from "../services/JobTitleService";
@@ -11,8 +11,8 @@ import * as Yup from "yup";
 export default function AddJobPosting() {
   const [cities, setCities] = useState([]);
   const [jobTitles, setJobTitle] = useState([]);
-  const [workingTimes, setworkingTimes] = useState([]);
-  const [typeOfWorks, settypeOfWorks] = useState([]);
+  const [workingTimes, setWorkingTimes] = useState([]);
+  const [typeOfWorks, setTypeOfWorks] = useState([]);
   let jobPostingService = new JobPostingService();
 
   useEffect(() => {
@@ -28,11 +28,11 @@ export default function AddJobPosting() {
     workingTimeService
       .getWorkingTimes()
 
-      .then((result) => setworkingTimes(result.data.data));
+      .then((result) => setWorkingTimes(result.data.data));
 
-    typeOfWorkService.getTypeOfWorks().then((result) =>
-      settypeOfWorks(result.data.data)
-    );
+    typeOfWorkService
+      .getTypeOfWorks()
+      .then((result) => setTypeOfWorks(result.data.data));
   }, []);
 
   const getCities = cities.map((city, index) => ({
@@ -45,10 +45,10 @@ export default function AddJobPosting() {
     text: jobTitle.title,
     value: jobTitle.id,
   }));
-  const getTypeOfWorks = typeOfWorks.map((TypeOfWork, index) => ({
+  const getTypeOfWorks = typeOfWorks.map((typeOfWork, index) => ({
     key: index,
-    text: TypeOfWork.typeOfWorkName,
-    value: TypeOfWork.id,
+    text: typeOfWork.typeOfWorkName,
+    value: typeOfWork.id,
   }));
   const getWorkingTimes = workingTimes.map((workingTime, index) => ({
     key: index,
@@ -68,7 +68,7 @@ export default function AddJobPosting() {
       typeOfWordId: "",
       workingTimeId: "",
       employerId: 2,
-    }, 
+    },
     validationSchema: Yup.object({
       jobTitleId: Yup.number().required("İş pozisyonu bilgisi seçiniz!"),
       cityId: Yup.string().required("Şehir bilgisi seçiniz!"),
@@ -82,24 +82,25 @@ export default function AddJobPosting() {
         "Çalışma zamanı tipi bilgisi seçiniz!"
       ),
     }),
+
     onSubmit: (values) => {
-      
       console.log(values);
       let jobPosting = {
-        lastDate: values.lastDate,
         city: { id: values.cityId },
+        lastDate: values.lastDate,
         employer: { id: values.employerId },
         jobTitle: { id: values.jobTitleId },
         minSalary: values.minSalary,
         maxSalary: values.maxSalary,
         openPosition: values.openPosition,
         jobDescription: values.jobDescription,
-        typeOfWord: { id: values.typeOfWordId },
-        workingTime: { id: values.workingTimeId }
-    };
-    console.log(jobPosting);
-    jobPostingService.addJobPosting(jobPosting).then((result) => console.log(result.data.message));
-   
+        typeOfWork: { id: values.typeOfWordId },
+        workingTime: { id: values.workingTimeId },
+      };
+      console.log(jobPosting);
+      jobPostingService
+        .addJobPosting(jobPosting)
+        .then((result) => console.log(result.data.message));
     },
   });
 
@@ -119,7 +120,6 @@ export default function AddJobPosting() {
               }}
             >
               <div className="divStyle">
-            
                 <Dropdown
                   style={{
                     marginRight: "1em",
@@ -143,7 +143,6 @@ export default function AddJobPosting() {
                 )}
               </div>
               <div className="divStyle">
-            
                 <Dropdown
                   style={{
                     marginRight: "1em",
@@ -167,7 +166,6 @@ export default function AddJobPosting() {
                 )}
               </div>
               <div className="divStyle">
-          
                 <Dropdown
                   style={{
                     marginRight: "1em",
@@ -179,20 +177,19 @@ export default function AddJobPosting() {
                   fluid
                   search
                   selection
-                  id="typeOfWorkId"
+                  id="typeOfWordId"
                   options={getTypeOfWorks}
                   onChange={(event, data) =>
-                    formik.setFieldValue("typeOfWorkId", data.value)
+                    formik.setFieldValue("typeOfWordId", data.value)
                   }
-                  value={formik.values.workTypeId}
+                  value={formik.values.typeOfWordId}
                   required
                 />
-                {formik.errors.typeOfWorkId && formik.touched.typeOfWorkId && (
-                  <p style={{ color: "red" }}>{formik.errors.typeOfWorkId}</p>
+                {formik.errors.typeOfWordId && formik.touched.typeOfWordId && (
+                  <p style={{ color: "red" }}>{formik.errors.typeOfWordId}</p>
                 )}
               </div>
               <div className="divStyle">
-      
                 <Dropdown
                   style={{
                     marginRight: "1em",
@@ -219,7 +216,6 @@ export default function AddJobPosting() {
                   )}
               </div>
               <div className="divStyle">
-     
                 <Input
                   id="minSalary"
                   placeholder="MİNUMUM MAAŞ GİRİNİZ"
@@ -233,7 +229,6 @@ export default function AddJobPosting() {
                 )}
               </div>
               <div className="divStyle">
-      
                 <Input
                   id="maxSalary"
                   placeholder="MAXİUMUM MAAŞ GİRİNİZ"
@@ -247,7 +242,6 @@ export default function AddJobPosting() {
                 )}
               </div>
               <div className="divStyle">
-            
                 <Input
                   id="openPosition"
                   placeholder="AÇIK POZİSYON SAYISI GİRİNİZ"
@@ -261,7 +255,6 @@ export default function AddJobPosting() {
                 )}
               </div>
               <div className="divStyle">
-            
                 <Input
                   type="date"
                   id="lastDate"
@@ -276,7 +269,6 @@ export default function AddJobPosting() {
                 )}
               </div>
               <div className="divStyle">
-            
                 <Input
                   id="jobDescription"
                   placeholder="İŞ TANIMI GİRİNİZ"
@@ -301,7 +293,7 @@ export default function AddJobPosting() {
                 marginBottom: "0.001em",
               }}
             >
-           İŞ İLANI EKLE
+              İŞ İLANI EKLE
             </Button>
           </form>
         </Segment>
