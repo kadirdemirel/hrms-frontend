@@ -1,35 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Icon,  Menu, Table } from "semantic-ui-react";
-import CvSkillService from "../services/CvSkillService"
-
+import { Icon, Menu, Table } from "semantic-ui-react";
+import CvSkillService from "../services/CvSkillService";
 
 export default function CvSkillList() {
- 
-
-    const [cvSkills, setCvSkills] = useState([]);
-    let{id}=useParams();
+  const [cvSkills, setCvSkills] = useState([]);
+  let { id } = useParams();
   useEffect(() => {
     let cvSkillService = new CvSkillService();
-    cvSkillService.getCvSkills(id).then((result) => setCvSkills(result.data.data));
+    cvSkillService
+      .getCvSkills(id)
+      .then((result) => setCvSkills(result.data.data));
   }, []);
 
- 
-    return (
-        <div>
-              <Table celled>
+  return (
+    <div>
+      <Table celled>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Beceri</Table.HeaderCell>
-       
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {cvSkills.map((cvSkill) => (
             <Table.Row key={cvSkill.id}>
-              <Table.Cell><div>{cvSkill.skillName}</div></Table.Cell>
-          
+              <Table.Cell>
+                <div>{cvSkill.skillName}</div>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -53,6 +51,6 @@ export default function CvSkillList() {
           </Table.Row>
         </Table.Footer>
       </Table>
-        </div>
-    )
+    </div>
+  );
 }

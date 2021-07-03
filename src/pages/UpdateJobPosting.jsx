@@ -7,8 +7,10 @@ import JobTitleService from "../services/JobTitleService";
 import WorkingTimeService from "../services/WorkingTimeService";
 import TypeOfWorkService from "../services/TypeOfWorkService";
 import * as Yup from "yup";
+import { useParams } from "react-router";
 
-export default function AddJobPosting() {
+export default function UpdateJobPosting() {
+  let { id } = useParams();
   const [cities, setCities] = useState([]);
   const [jobTitles, setJobTitle] = useState([]);
   const [workingTimes, setWorkingTimes] = useState([]);
@@ -20,6 +22,7 @@ export default function AddJobPosting() {
     let jobTitleService = new JobTitleService();
     let workingTimeService = new WorkingTimeService();
     let typeOfWorkService = new TypeOfWorkService();
+
     cityService.getCities().then((result) => setCities(result.data.data));
     jobTitleService
       .getJobTitles()
@@ -58,6 +61,7 @@ export default function AddJobPosting() {
 
   const formik = useFormik({
     initialValues: {
+      id: id,
       jobTitleId: "",
       cityId: "",
       minSalary: "",
@@ -86,6 +90,7 @@ export default function AddJobPosting() {
     onSubmit: (values) => {
       console.log(values);
       let jobPosting = {
+        id: values.id,
         city: { id: values.cityId },
         lastDate: values.lastDate,
         employer: { id: values.employerId },
@@ -96,8 +101,6 @@ export default function AddJobPosting() {
         jobDescription: values.jobDescription,
         typeOfWork: { id: values.typeOfWordId },
         workingTime: { id: values.workingTimeId },
-     
-        
       };
       console.log(jobPosting);
       jobPostingService
@@ -110,7 +113,7 @@ export default function AddJobPosting() {
     <div>
       <Segment.Group>
         <Segment inverted>
-          <h3 className="headerStyle">İŞ İLANI EKLE</h3>
+          <h3 className="headerStyle">İŞ İLANI GÜNCELLE</h3>
         </Segment>
         <Segment>
           <form onSubmit={formik.handleSubmit}>
@@ -121,6 +124,7 @@ export default function AddJobPosting() {
                 fontWeight: "bold",
               }}
             >
+         
               <div className="divStyle">
                 <Dropdown
                   style={{
