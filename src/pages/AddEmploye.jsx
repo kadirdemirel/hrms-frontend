@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { Button, Segment, Input, Dropdown, Form } from "semantic-ui-react";
 import * as Yup from "yup";
+
 import { useParams } from "react-router";
 export default function AddEmploye() {
   let employeService = new EmployeService();
@@ -113,9 +114,11 @@ export default function AddEmploye() {
                 color: "white",
                 marginBottom: "0.001em",
               }}
+            
             >
               GÜNCELLE
             </Button>
+          
           </Form>
         </Segment>
       </Segment.Group>

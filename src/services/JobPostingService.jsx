@@ -21,7 +21,7 @@ export default class JobPostingService {
 
   getAllByPage(pageNo, pageSize) {
     return axios.get(
-      "http://localhost:8080/api/products/getAllByPage?pageNo=+" +
+      "http://localhost:8080/api/jobpostings/getAllByPage?pageNo=" +
         pageNo +
         "&pageSize=" +
         pageSize
@@ -36,4 +36,10 @@ export default class JobPostingService {
         typeOfWorkId
     );
   }
+
+  getByFilter(pageNo, pageSize, filterOption){
+    return axios.post("http://localhost:8080/api/jobpostings/getByFilter?pageNo="+pageNo+"&pageSize="+pageSize,filterOption);
+}
+
+
 }

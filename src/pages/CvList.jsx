@@ -1,19 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { Button, Icon,  Menu, Table } from "semantic-ui-react";
+import { Button, Icon, Menu, Table, Label } from "semantic-ui-react";
 import CvService from "../services/CvService";
-import CvDetail from "./CvDetail";
+
 import { Link } from "react-router-dom";
+
+import LanguagePopups from "./popups/LanguagePopups";
 export default function CvList() {
+  let cvService = new CvService();
   const [cvs, setCvs] = useState([]);
+  const [id, setId] = useState(0);
+  const [cvUpdate, setCvUpdate] = useState([]);
+  const [isUpdate, setIsUpdate] = useState(false);
   useEffect(() => {
-    let cvService = new CvService();
+    if (isUpdate === true) {
+      cvService.getCvsById(id).then((result) => setCvUpdate(result.data.data));
+    }
+  }, [isUpdate]);
+  useEffect(() => {
+    setIsUpdate(false);
     cvService.getCvs().then((result) => setCvs(result.data.data));
   }, []);
+
+  // const [stateModal, setStateModal] = useState({ type: "close", size: "tiny" });
+
+  const handleLanguagePopups = (id) => {
+    setIsUpdate(true);
+    setId(id);
+    //console.log(stateModal)
+  };
+  if (isUpdate === true) {
+    return <LanguagePopups propsCv={cvUpdate}></LanguagePopups>;
+  }
   return (
     <div>
-      <Table celled>
+      <Table color="blue">
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell>Github</Table.HeaderCell>
             <Table.HeaderCell>Linkedln</Table.HeaderCell>
             <Table.HeaderCell>Ön Yazı</Table.HeaderCell>
@@ -25,20 +48,60 @@ export default function CvList() {
             <Table.HeaderCell>Soyad</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
-
         <Table.Body>
           {cvs.map((cv) => (
             <Table.Row key={cv.id}>
-              <Table.Cell><div>{cv.gitHubAddress}</div></Table.Cell>
-              <Table.Cell><div>{cv.linkedlnAddress}</div></Table.Cell>
-              <Table.Cell><div>{cv.coverLetter}</div></Table.Cell>
-              <Table.Cell><div>{cv.yearOfEntry}</div></Table.Cell>
-              <Table.Cell><div>{cv.yearOfGraduation}</div></Table.Cell>
-              <Table.Cell><div>{cv.yearOfEmployment}</div></Table.Cell>
-              <Table.Cell><div>{cv.yearOff}</div></Table.Cell>
-              <Table.Cell><div>{cv.candidate.firstName}</div></Table.Cell>
-              <Table.Cell><div>{cv.candidate.lastName}</div></Table.Cell>
-              <Table.Cell><div><Button color="twitter"><Link to={`/cv_detail/${cv.id}`}>Detay</Link></Button></div></Table.Cell>
+              <Table.Cell>
+                <Label size="small" as="a" color="red" ribbon>
+                  Özgeçmiş
+                </Label>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.gitHubAddress}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.linkedlnAddress}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.coverLetter}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.yearOfEntry}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.yearOfGraduation}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.yearOfEmployment}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.yearOff}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.candidate.firstName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{cv.candidate.lastName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>
+                  {/* <Button onClick={() => handleLanguagePopups(cv.id)}>
+                    Tiny
+                  </Button> */}
+                  <Button
+                    icon="pencil"
+                    white
+                    onClick={() => handleLanguagePopups(cv.id)}
+                  ></Button>
+                </div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>
+                  <Button>
+                    <Link to={`/cv_detail/${cv.id}`}>Detay</Link>
+                  </Button>
+                </div>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -63,5 +126,5 @@ export default function CvList() {
         </Table.Footer>
       </Table>
     </div>
-  )
+  );
 }

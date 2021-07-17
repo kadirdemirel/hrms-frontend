@@ -1,6 +1,15 @@
 import { render } from "@testing-library/react";
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table, Label, Button } from "semantic-ui-react";
+import {
+  Icon,
+  Menu,
+  Table,
+  Label,
+  Button,
+  Segment,
+  Dropdown,
+} from "semantic-ui-react";
+import { Pagination } from "semantic-ui-react";
 import JobPostingService from "../services/JobPostingService";
 import { If, Then, ElseIf, Else } from "react-if-elseif-else-render";
 import { useFormik } from "formik";
@@ -13,43 +22,36 @@ export default function JobPostingList() {
   const [jobPostings, setJobPostings] = useState([]);
   const [filterOption, setFilterOption] = useState({});
 
-  // useEffect(() => {
-  //   console.log(filterOption);
-  //   if (
-  //     filterOption.cityId === undefined &&
-  //     filterOption.typeOfWorkId === undefined
-  //   ) {
-  //     jobPostingService.getJobPostings().then((result) => {
-  //       setJobPostings(result.data.data);
-  //     });
-  //   } else {
-  //     jobPostingService
-  //       .getByCityIdAndTypeOfWorkId(
-  //         filterOption.cityId,
-  //         filterOption.typeOfWorkId
-  //       )
-  //       .then((result) => {
-  //         setJobPostings(result.data.data);
-  //       });
-  //   }
-  // }, [filterOption]);
+  const [activePage, setActivePage] = useState(1);
+  const [pageSize] = useState(10);
+  const [totalPageSize, setTotalPageSize] = useState(0);
+
+  useEffect(() => {
+    jobPostingService
+      .getByFilter(activePage, pageSize, filterOption)
+      .then((result) => {
+        setJobPostings(result.data.data);
+        setTotalPageSize(parseInt(result.data.message));
+      });
+    console.log(filterOption);
+  }, [filterOption, activePage, pageSize]);
 
   let jobPostingStatus;
   let jobPostingId;
-  const formik = useFormik({
-    onSubmit: (values) => {
-      alert(values);
-    },
-  });
+
+  const handlePaginationChange = (e, { activePage }) => {
+    setActivePage(activePage);
+  };
   const handleFilterClick = (param) => {
     if (param.cityId.length === 0) {
-      param.cityId = undefined;
+      param.cityId = null;
     }
     if (param.typeOfWorkId.length === 0) {
-      param.typeOfWorkId = undefined;
+      param.typeOfWorkId = null;
     }
 
     setFilterOption(param);
+    setActivePage(1);
   };
 
   function changeState(id, status) {
@@ -64,18 +66,27 @@ export default function JobPostingList() {
 
     window.location.reload(false);
   }
-  const options = [
-    { key: 1, text: "Choice 1", value: 1 },
-    { key: 2, text: "Choice 2", value: 2 },
-    { key: 3, text: "Choice 3", value: 3 },
-  ];
+
   render();
   {
     return (
       <div>
         <Filter clickEvent={handleFilterClick}></Filter>
-
-        <Table celled>
+        <Segment color="black" raised>
+          <Label size="large">Sayfa</Label>
+          <Dropdown
+            placeholder="Seçiniz"
+            selection
+            options={[
+              { key: 1, text: "10", value: 10 },
+              { key: 2, text: "20", value: 20 },
+              { key: 3, text: "50", value: 50 },
+            ]}
+            onChange={handlePaginationChange}
+            value={pageSize}
+          />
+        </Segment>
+        <Table  color="blue">
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Minumum Ücret</Table.HeaderCell>
@@ -90,8 +101,7 @@ export default function JobPostingList() {
               <Table.HeaderCell>Çalışma Türü</Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
-              <Table.HeaderCell></Table.HeaderCell>
-              <Table.HeaderCell></Table.HeaderCell>
+            
             </Table.Row>
           </Table.Header>
 
@@ -145,21 +155,43 @@ export default function JobPostingList() {
                 <Table.Cell>
                   <div>{jobPosting.typeOfWork.typeOfWorkName}</div>
                 </Table.Cell>
+                
                 <Table.Cell>
                   <Button.Group>
                     <div>
                       <Button
+                        positive
+                        animated
+                        onClick={() => changeState(jobPosting.id, 1)}
+                      >
+                        <Button.Content visible>Onayla</Button.Content>
+                        <Button.Content hidden>
+                          <Icon name="check" />
+                        </Button.Content>
+                      </Button>
+                      {/* <Button positive
                         type="submit"
                         onClick={() => changeState(jobPosting.id, 1)}
                       >
                         ONAYLA
-                      </Button>
+                      </Button> */}
                       <Button
+                        negative
+                        animated
+                        onClick={() => changeState(jobPosting.id, -1)}
+                      >
+                        <Button.Content visible>Reddet</Button.Content>
+                        <Button.Content hidden>
+                          <Icon name="ban" />
+                        </Button.Content>
+                      </Button>
+                      {/* <Button
+                        negative
                         type="submit"
                         onClick={() => changeState(jobPosting.id, -1)}
                       >
-                        REDDET
-                      </Button>
+                        Reddet
+                      </Button> */}
                     </div>
                   </Button.Group>
                 </Table.Cell>
@@ -167,11 +199,24 @@ export default function JobPostingList() {
                 <Table.Cell>
                   <div>
                     <Button
+                      color="yellow"
+                      animated
+                      onClick={() => changeStatee(7, jobPosting.id)} 
+                    >
+                      <Button.Content visible>
+                        {" "}
+                        <Icon name="star outline" />
+                      </Button.Content>
+                      <Button.Content hidden>
+                        <Icon name="star" />
+                      </Button.Content>
+                    </Button>
+                    {/* <Button
                       type="submit"
                       onClick={() => changeStatee(7, jobPosting.id)}
                     >
                       FAVORİLERİME EKLE
-                    </Button>
+                    </Button> */}
                   </div>
                 </Table.Cell>
               </Table.Row>
@@ -181,18 +226,13 @@ export default function JobPostingList() {
           <Table.Footer>
             <Table.Row>
               <Table.HeaderCell colSpan="3">
-                <Menu floated="right" pagination>
-                  <Menu.Item as="a" icon>
-                    <Icon name="chevron left" />
-                  </Menu.Item>
-                  <Menu.Item as="a">1</Menu.Item>
-                  <Menu.Item as="a">2</Menu.Item>
-                  <Menu.Item as="a">3</Menu.Item>
-                  <Menu.Item as="a">4</Menu.Item>
-                  <Menu.Item as="a" icon>
-                    <Icon name="chevron right" />
-                  </Menu.Item>
-                </Menu>
+                <Pagination
+                  firstItem={null}
+                  lastItem={null}
+                  activePage={activePage}
+                  onPageChange={handlePaginationChange}
+                  totalPages={Math.ceil(totalPageSize / pageSize)}
+                />
               </Table.HeaderCell>
             </Table.Row>
           </Table.Footer>

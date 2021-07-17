@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Icon,  Menu, Table } from "semantic-ui-react";
+import { Button, Icon, Menu, Table } from "semantic-ui-react";
 import LanguageLevelService from "../services/LanguageLevelService";
 
-export default function LanguageLevelList() {
+export default function LanguageLevelList(props) {
   const [languageLevels, setlanguageLevels] = useState([]);
 
-  let{id}=useParams();
+  let { id } = useParams();
 
   useEffect(() => {
     let languageLevelService = new LanguageLevelService();
@@ -28,8 +28,19 @@ export default function LanguageLevelList() {
         <Table.Body>
           {languageLevels.map((languageLevel) => (
             <Table.Row key={languageLevel.id}>
-              <Table.Cell><div>{languageLevel.languageName}</div></Table.Cell>
-              <Table.Cell><div>{languageLevel.levelName}</div></Table.Cell>
+              <Table.Cell>
+                <div>{languageLevel.languageName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{languageLevel.levelName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <Button
+                  icon="pencil"
+                  white
+                  onClick={() => props.functionUpdate(languageLevel.id)}
+                ></Button>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

@@ -1,19 +1,20 @@
-import React,{ useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SchoolSectionService from "../services/SchoolSectionService";
-import { Icon,  Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table, Button } from "semantic-ui-react";
 import { useParams } from "react-router-dom";
-export default function SchoolSectionList() {
+export default function SchoolSectionList(props) {
   const [schoolSections, setschoolSections] = useState([]);
-  let{id}=useParams();
+  let { id } = useParams();
   useEffect(() => {
     let schoolSectionService = new SchoolSectionService();
     schoolSectionService
       .getSchoolSections(id)
       .then((result) => setschoolSections(result.data.data));
   }, []);
+  console.log(schoolSections);
   return (
     <div>
-      <Table celled>
+      <Table>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Okul</Table.HeaderCell>
@@ -24,8 +25,21 @@ export default function SchoolSectionList() {
         <Table.Body>
           {schoolSections.map((schoolSection) => (
             <Table.Row key={schoolSection.id}>
-              <Table.Cell><div>{schoolSection.schoolName}</div></Table.Cell>
-              <Table.Cell><div>{schoolSection.sectionName}</div></Table.Cell>
+              <Table.Cell>
+                <div>{schoolSection.schoolName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{schoolSection.sectionName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>
+                  <Button
+                    icon="pencil"
+                    white
+                    onClick={() => props.functionUpdate(schoolSection.id)}
+                  ></Button>
+                </div>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>

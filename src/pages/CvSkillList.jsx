@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table,Button } from "semantic-ui-react";
 import CvSkillService from "../services/CvSkillService";
 
-export default function CvSkillList() {
+export default function CvSkillList(props) {
   const [cvSkills, setCvSkills] = useState([]);
   let { id } = useParams();
   useEffect(() => {
@@ -27,6 +27,13 @@ export default function CvSkillList() {
             <Table.Row key={cvSkill.id}>
               <Table.Cell>
                 <div>{cvSkill.skillName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <Button
+                  icon="pencil"
+                  white
+                  onClick={() => props.functionUpdate(cvSkill.id)}
+                ></Button>
               </Table.Cell>
             </Table.Row>
           ))}

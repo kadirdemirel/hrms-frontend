@@ -9,7 +9,7 @@ export default function CandidateList() {
   }, []);
   return (
     <div>
-      <Table celled>
+      <Table basic="very">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Ad</Table.HeaderCell>
