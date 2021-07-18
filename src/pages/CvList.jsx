@@ -33,19 +33,55 @@ export default function CvList() {
   }
   return (
     <div>
-      <Table color="blue">
+      <Table color="blue" selectable>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell>Github</Table.HeaderCell>
-            <Table.HeaderCell>Linkedln</Table.HeaderCell>
-            <Table.HeaderCell>Ön Yazı</Table.HeaderCell>
-            <Table.HeaderCell>Giriş Yılı</Table.HeaderCell>
-            <Table.HeaderCell>Mezuniyet Yılı</Table.HeaderCell>
-            <Table.HeaderCell>İşe Giriş Yılı</Table.HeaderCell>
-            <Table.HeaderCell>İşten Çıkış Yılı</Table.HeaderCell>
-            <Table.HeaderCell>Ad</Table.HeaderCell>
-            <Table.HeaderCell>Soyad</Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Github
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Linkedln
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Ön Yazı
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Giriş Yılı
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Mezuniyet Yılı
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Giriş Yılı
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Çıkış Yılı
+              </Label>{" "}
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Ad
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Soyad
+              </Label>
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>

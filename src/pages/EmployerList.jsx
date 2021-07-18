@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Icon, Menu, Table } from "semantic-ui-react";
+import { Icon, Label, Menu, Table } from "semantic-ui-react";
 import EmployerService from "../services/EmployerService";
 
 export default function EmployerList() {
@@ -13,18 +13,22 @@ export default function EmployerList() {
 
   return (
     <div>
-      <Table  basic="very">
+      <Table color="blue" selectable>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Şirket Adı</Table.HeaderCell>
-            <Table.HeaderCell>Web Adresi</Table.HeaderCell>
-            <Table.HeaderCell>Telefon</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell ><Label pointing="below" color="violet">Şirket Adı</Label></Table.HeaderCell>
+            <Table.HeaderCell><Label pointing="below" color="violet">Web Adresi</Label></Table.HeaderCell>
+            <Table.HeaderCell><Label pointing="below" color="violet">Telefon</Label></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {employers.map((employer) => (
             <Table.Row key={employer.id}>
+              <Table.Cell collapsing>
+                <Icon name="handshake" />
+              </Table.Cell>
               <Table.Cell>
                 <div>{employer.companyName}</div>
               </Table.Cell>

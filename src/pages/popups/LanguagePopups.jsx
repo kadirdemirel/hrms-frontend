@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Icon, Modal, Image, Header } from "semantic-ui-react";
+import { Button, Icon, Modal, Image, Header, Label } from "semantic-ui-react";
 import CvService from "../../services/CvService";
 import { Form } from "react-bootstrap";
 

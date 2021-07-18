@@ -86,19 +86,19 @@ export default function JobPostingList() {
             value={pageSize}
           />
         </Segment>
-        <Table  color="blue">
+        <Table    selectable   color="blue">
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Minumum Ücret</Table.HeaderCell>
-              <Table.HeaderCell>Maxiumum Ücret</Table.HeaderCell>
-              <Table.HeaderCell>Açık Pozisyon</Table.HeaderCell>
-              <Table.HeaderCell>Son Başvuru Tarihi</Table.HeaderCell>
-              <Table.HeaderCell>Başvuru Durumu</Table.HeaderCell>
-              <Table.HeaderCell>Genel İş Pozisyonu</Table.HeaderCell>
-              <Table.HeaderCell>Şirket</Table.HeaderCell>
-              <Table.HeaderCell>Şehir</Table.HeaderCell>
-              <Table.HeaderCell>Çalışma Zamanı</Table.HeaderCell>
-              <Table.HeaderCell>Çalışma Türü</Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Minumum Ücret</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Maxiumum Ücret</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Açık Pozisyon</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Son Başvuru Tarihi</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Başvuru Durumu</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Genel İş Pozisyonu</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Şirket</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Şehir</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Çalışma Zamanı</Label></Table.HeaderCell>
+              <Table.HeaderCell><Label pointing="below" color="violet">Çalışma Türü</Label></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
               <Table.HeaderCell></Table.HeaderCell>
             
@@ -175,10 +175,11 @@ export default function JobPostingList() {
                       >
                         ONAYLA
                       </Button> */}
-                      <Button
+                      <Button 
                         negative
                         animated
                         onClick={() => changeState(jobPosting.id, -1)}
+                        style={{marginTop:"0.5em"}}
                       >
                         <Button.Content visible>Reddet</Button.Content>
                         <Button.Content hidden>

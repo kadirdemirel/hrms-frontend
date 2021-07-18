@@ -22,7 +22,7 @@ export default function Dashboard() {
             <Categories></Categories>
           </Grid.Column>
           <Grid.Column width={12}>
-            <Route path="/" exact component={JobPostingList}></Route>
+            <Route path="/"  exact component={JobPostingList}></Route>
             <Route path="/job_title" exact component={JobTitleList}></Route>
             <Route path="/job_posting" component={JobPostingList}></Route>
             <Route path="/employer" component={EmployerList}></Route>

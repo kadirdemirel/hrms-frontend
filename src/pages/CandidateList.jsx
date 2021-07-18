@@ -1,33 +1,61 @@
 import React, { useState, useEffect } from "react";
-import { Icon,  Menu, Table } from "semantic-ui-react";
+import { Icon, Menu, Table, Label } from "semantic-ui-react";
 import CandidateService from "../services/CandidateService";
 export default function CandidateList() {
   const [candidates, setcandidates] = useState([]);
   useEffect(() => {
     let candidateService = new CandidateService();
-    candidateService.getCandidates().then((result) => setcandidates(result.data.data));
+    candidateService
+      .getCandidates()
+      .then((result) => setcandidates(result.data.data));
   }, []);
   return (
     <div>
-      <Table basic="very">
+      <Table color="blue">
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Ad</Table.HeaderCell>
-            <Table.HeaderCell>Soyad</Table.HeaderCell>
-            <Table.HeaderCell>TC Kimlik Numarası</Table.HeaderCell>
-            <Table.HeaderCell>Doğum Tarihi</Table.HeaderCell>
-          
+            <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Ad
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Soyad
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                TC Kimlik Numarası
+              </Label>
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <Label pointing="below" color="violet">
+                Doğum Tarihi
+              </Label>
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
           {candidates.map((candidate) => (
             <Table.Row key={candidate.id}>
-              <Table.Cell><div>{candidate.firstName}</div></Table.Cell>
-              <Table.Cell><div>{candidate.lastName}</div></Table.Cell>
-              <Table.Cell><div>{candidate.identificationNumber}</div></Table.Cell>
-              <Table.Cell><div>{candidate.birthDate}</div></Table.Cell>
-           
+              <Table.Cell collapsing>
+                <Icon name="user" />
+              </Table.Cell>
+              <Table.Cell>
+                <div>{candidate.firstName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{candidate.lastName}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{candidate.identificationNumber}</div>
+              </Table.Cell>
+              <Table.Cell>
+                <div>{candidate.birthDate}</div>
+              </Table.Cell>
             </Table.Row>
           ))}
         </Table.Body>
@@ -52,5 +80,5 @@ export default function CandidateList() {
         </Table.Footer>
       </Table>
     </div>
-  )
+  );
 }
