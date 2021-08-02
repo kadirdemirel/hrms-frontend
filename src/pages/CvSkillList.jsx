@@ -15,7 +15,7 @@ export default function CvSkillList(props) {
 
   return (
     <div>
-      <Table celled>
+      <Table celled color="violet">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Beceri</Table.HeaderCell>
@@ -39,7 +39,7 @@ export default function CvSkillList(props) {
           ))}
         </Table.Body>
 
-        <Table.Footer>
+        {/* <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="3">
               <Menu floated="right" pagination>
@@ -56,7 +56,7 @@ export default function CvSkillList(props) {
               </Menu>
             </Table.HeaderCell>
           </Table.Row>
-        </Table.Footer>
+        </Table.Footer> */}
       </Table>
     </div>
   );

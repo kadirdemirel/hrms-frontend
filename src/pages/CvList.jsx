@@ -33,7 +33,7 @@ export default function CvList() {
   }
   return (
     <div>
-      <Table color="blue" selectable>
+      <Table color="blue" selectable >
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell></Table.HeaderCell>
@@ -141,8 +141,8 @@ export default function CvList() {
             </Table.Row>
           ))}
         </Table.Body>
-
-        <Table.Footer>
+                  
+        {/* <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="3">
               <Menu floated="right" pagination>
@@ -159,8 +159,9 @@ export default function CvList() {
               </Menu>
             </Table.HeaderCell>
           </Table.Row>
-        </Table.Footer>
+        </Table.Footer> */}
       </Table>
+ 
     </div>
   );
 }

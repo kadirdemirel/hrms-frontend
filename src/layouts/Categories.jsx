@@ -13,9 +13,9 @@ export default function Categories() {
       </Menu> */}
 
       <Grid>
-        <Grid.Column >
-          <Menu fluid vertical tabular  color="teal">
-            <Menu.Item name="Ana Sayfa" as={NavLink} to="/" />
+        <Grid.Column>
+          <Menu fluid vertical tabular color="teal">
+            <Menu.Item as={NavLink} exact to="/" name="Ana Sayfa" />
             <Menu.Item name="İş İlanları" as={NavLink} to="/job_posting" />
             <Menu.Item name="İş Verenler" as={NavLink} to="/employer" />
             <Menu.Item name="İş Arayanlar" as={NavLink} to="/candidate" />

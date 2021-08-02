@@ -17,7 +17,7 @@ export default function LanguageLevelList(props) {
 
   return (
     <div>
-      <Table celled>
+      <Table color="violet">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Yabancı Dil</Table.HeaderCell>
@@ -45,7 +45,7 @@ export default function LanguageLevelList(props) {
           ))}
         </Table.Body>
 
-        <Table.Footer>
+        {/* <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="3">
               <Menu floated="right" pagination>
@@ -62,7 +62,7 @@ export default function LanguageLevelList(props) {
               </Menu>
             </Table.HeaderCell>
           </Table.Row>
-        </Table.Footer>
+        </Table.Footer> */}
       </Table>
     </div>
   );

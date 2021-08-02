@@ -109,7 +109,7 @@ export default function AddJobPosting() {
   return (
     <div>
       <Segment.Group>
-        <Segment inverted>
+        <Segment inverted color="violet">
           <h3 className="headerStyle">İŞ İLANI EKLE</h3>
         </Segment>
         <Segment>
@@ -290,7 +290,7 @@ export default function AddJobPosting() {
             <Button
               type="submit"
               style={{
-                backgroundColor: "	#3399FF",
+                backgroundColor:"#8F00FF",
                 color: "white",
                 marginBottom: "0.001em",
               }}

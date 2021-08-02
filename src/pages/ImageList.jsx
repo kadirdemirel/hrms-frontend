@@ -12,7 +12,7 @@ export default function ImageList() {
   
     return (
         <div>
-             <Table celled>
+             <Table celled color="violet">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Image</Table.HeaderCell>
@@ -23,13 +23,13 @@ export default function ImageList() {
         <Table.Body>
           {images.map((image) => (
             <Table.Row key={image.id}>
-              <Table.Cell><div><Image src={image.url} size='small' wrapped /></div>  </Table.Cell>
+              <Table.Cell><div><Image src={image.url} size="medium" circular centered /></div>  </Table.Cell>
         
             </Table.Row>
           ))}
         </Table.Body>
 
-        <Table.Footer>
+        {/* <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="3">
               <Menu floated="right" pagination>
@@ -46,7 +46,7 @@ export default function ImageList() {
               </Menu>
             </Table.HeaderCell>
           </Table.Row>
-        </Table.Footer>
+        </Table.Footer> */}
       </Table>
         </div>
     )

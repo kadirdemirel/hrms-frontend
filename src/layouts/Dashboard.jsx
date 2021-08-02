@@ -12,17 +12,20 @@ import AddJobTitle from "../pages/AddJobTitle";
 import CvDetail from "../pages/CvDetail";
 import UpdateJobPosting from "../pages/UpdateJobPosting";
 import AddEmploye from "../pages/AddEmploye";
+import Home from "../pages/Home";
 
 export default function Dashboard() {
   return (
     <div>
+    
       <Grid>
         <Grid.Row>
           <Grid.Column width={4}>
             <Categories></Categories>
           </Grid.Column>
           <Grid.Column width={12}>
-            <Route path="/"  exact component={JobPostingList}></Route>
+            <Route path="/"  exact component={Home}></Route>
+            <Route path="/home"  exact component={Home}></Route>
             <Route path="/job_title" exact component={JobTitleList}></Route>
             <Route path="/job_posting" component={JobPostingList}></Route>
             <Route path="/employer" component={EmployerList}></Route>

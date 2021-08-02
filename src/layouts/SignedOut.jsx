@@ -4,7 +4,7 @@ export default function SignedOut({signIn}) {
   return (
     <div>
       <Button.Group size="small">
-        <Button>Kayıt Ol</Button>
+        <Button >Kayıt Ol</Button>
         <Button.Or />
         <Button onClick={signIn} positive>Giriş Yap</Button>
       </Button.Group>

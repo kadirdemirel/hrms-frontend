@@ -14,7 +14,7 @@ export default function SchoolSectionList(props) {
   console.log(schoolSections);
   return (
     <div>
-      <Table>
+       <Table color="violet">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>Okul</Table.HeaderCell>
@@ -44,7 +44,7 @@ export default function SchoolSectionList(props) {
           ))}
         </Table.Body>
 
-        <Table.Footer>
+        {/* <Table.Footer>
           <Table.Row>
             <Table.HeaderCell colSpan="3">
               <Menu floated="right" pagination>
@@ -61,7 +61,7 @@ export default function SchoolSectionList(props) {
               </Menu>
             </Table.HeaderCell>
           </Table.Row>
-        </Table.Footer>
+        </Table.Footer> */}
       </Table>
     </div>
   );
